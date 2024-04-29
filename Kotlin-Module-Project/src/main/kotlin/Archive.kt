@@ -43,4 +43,8 @@ class Archive (
 
         innerArchive?.add(Archive(archiveName, mutableListOf()))
     }
+
+    override fun toString(): String {
+        return "$name"
+    }
 }
