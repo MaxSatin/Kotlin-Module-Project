@@ -6,10 +6,10 @@ class Archive (
 
     fun createNote () {
         println("Введите заголовок заметки: ")
-        var noteName = ArchiveManip.readInput().trim().toLowerCase().capitalize()
+        var noteName = ArchiveManip.readInputString().trim().toLowerCase().capitalize()
 
         println("Введите текст заметки: ")
-        var noteContents = ArchiveManip.readInput().trim()
+        var noteContents = ArchiveManip.readInputString().trim()
         notes.add(Note(noteName, noteContents))
     }
     fun printArchive () {
@@ -21,7 +21,7 @@ class Archive (
         }
     }
 
-    fun printNotes() {
+    fun printNotes () {
         if (this.notes.isEmpty()) {
             println("Архив не содержит заметок")
         } else {
@@ -39,7 +39,7 @@ class Archive (
 
     fun addArchive () {
         println("Введите название Архива: ")
-        var archiveName = ArchiveManip.readInput().trim().toLowerCase().capitalize()
+        var archiveName = ArchiveManip.readInputString().trim().toLowerCase().capitalize()
 
         innerArchive?.add(Archive(archiveName, mutableListOf()))
     }
