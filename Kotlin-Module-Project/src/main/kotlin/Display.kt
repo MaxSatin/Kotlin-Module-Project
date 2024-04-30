@@ -6,52 +6,37 @@ class Display {
                 println(
                     "Выберите дальнейшие действия:\n" +
                             "0. Создать еще один Архив\n" +
-                            "1. Показать список Архивов\n" +
+                            "1. Выбрать созданный Архив из списка\n" +
                             "2. Выход"
                 )
                 while (true) {
                     when (ArchiveManip.readInputString()) {
-                        "0" -> {
-                            ArchiveManip.createArchive(); break
-                        }
-
-                        "1" -> {
-                            ArchiveManip.getMainArchiveList();
-                            Display.archiveListDisplay(); break
-                        }
-
+                        "0" -> { ArchiveManip.createArchive(); break }
+                        "1" -> { ArchiveManip.getMainArchiveList(); archiveListDisplay(); break }
                         "2" -> return
                         else -> println("Вы вводите неверную команду")
                     }
                 }
             }
         }
-
         fun archiveListDisplay() {
 
             while (true) {
                 println(
                     "Выберите дальнейшие действия:\n" +
-                            "0. Просмотреть содержимое Архива под номером: (?) \n" +
+                            "0. Просмотреть заметки Архива под номером: (?) \n" +
                             "1. Вернуться в предыдущее меню\n" +
                             "2. Выход"
                 )
                 while (true)
                     when (ArchiveManip.readInputString()) {
-                        "0" -> {
-                            archiveByIndex = ArchiveManip.getArchiveByIndex()
-                            archiveByIndex.printNotes();
-                            Display.archiveDisplay(); break
-                        }
-
-                        "1" -> {
-                            Display.mainDisplay(); break
-                        }
-
+                        "0" -> { archiveByIndex = ArchiveManip.getArchiveByIndex()
+                            archiveByIndex.printNotes()
+                            archiveDisplay(); break }
+                        "1" -> {mainDisplay(); break }
                         "2" -> return
                         else -> println("Вы вводите неверную команду")
                     }
-
             }
         }
 
@@ -59,22 +44,21 @@ class Display {
             while (true) {
                 println(
                     "Выберите дальнейшие действия:\n" +
-                            "0. Создать заметку \n" +
-                            "1. Удалить заметку\n" +
-                            "2. Вернуться в предыдущее меню\n" +
-                            "3. Выход"
+                            "0. Просмотреть список заметок \n" +
+                            "1. Создать заметку \n" +
+                            "2. Удалить заметку\n" +
+                            "3. Редактировать заметку" +
+                            "4. Вернуться в предыдущее меню\n" +
+                            "5. Выход"
                 )
                 while (true)
                     when (ArchiveManip.readInputString()) {
-                        "0" -> {
-                            archiveByIndex.createNote(); break
-                        }
-
-                        "1" -> {
-                            archiveByIndex.deleteNote(ArchiveManip.readInputInt()); break
-                        }
-
-                        "2" -> Display.archiveListDisplay()
+                        "0" -> {archiveByIndex.printNotes()}
+                        "1" -> {archiveByIndex.createNote()}
+                        "2" -> {archiveByIndex.deleteNote(ArchiveManip.readInputInt())}
+                        "3" -> {archiveByIndex.renameNote()}
+                        "4" -> {archiveListDisplay()}
+                        "5" -> return
                         else -> println("Вы вводите неверную команду")
                     }
             }

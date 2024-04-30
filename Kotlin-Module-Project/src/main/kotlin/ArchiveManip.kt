@@ -21,10 +21,10 @@ class ArchiveManip {
         }
 
         fun readInputString(): String {
-            return input.next().trim()
+            return input.nextLine().trim()
         }
 
-        fun readInputInt() : Int {
+        fun readInputInt(): Int {
             return input.nextInt()
         }
 
