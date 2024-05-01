@@ -1,6 +1,5 @@
 import java.util.Scanner
 
-
 class ArchiveManip {
 
     companion object {
@@ -25,10 +24,17 @@ class ArchiveManip {
         }
 
         fun readInputInt(): Int {
-            return input.nextInt()
+            val userInput = Scanner(System.`in`)
+            while (!(userInput.hasNextInt())) {
+                println("Введите число!")
+                userInput.next()
+            }
+            val int = userInput.nextInt()
+            return int
         }
 
         fun getMainArchiveList() {
+            println(" \nСписок доступных Архивов:")
             for (i in 0 until archives.size)
                 println("$i - Архив '${archives.get(i).toString()}'")
         }

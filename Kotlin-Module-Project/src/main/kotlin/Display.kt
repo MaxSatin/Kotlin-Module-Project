@@ -1,10 +1,27 @@
 class Display {
     companion object {
         lateinit var archiveByIndex: Archive
+
+        fun entryDisplay () {
+            if (ArchiveManip.noFirstArchive == true) {
+                println("Введите команду:\n 0. Создать Архив\n 1. Назад")
+                while (true)
+                    when (ArchiveManip.readInputString()) {
+                        "0" -> {
+                            ArchiveManip.createArchive(); break
+                        }
+
+                        "1" -> return
+                        else -> println("Вы вводите неверную команду")
+                    }
+            } else
+                mainDisplay()
+        }
+
         fun mainDisplay() {
             while (true) {
                 println(
-                    "Выберите дальнейшие действия:\n" +
+                    "\nВыберите дальнейшие действия:\n" +
                             "0. Создать еще один Архив\n" +
                             "1. Выбрать созданный Архив из списка\n" +
                             "2. Выход"
@@ -23,17 +40,18 @@ class Display {
 
             while (true) {
                 println(
-                    "Выберите дальнейшие действия:\n" +
-                            "0. Просмотреть заметки Архива под номером: (?) \n" +
-                            "1. Вернуться в предыдущее меню\n" +
-                            "2. Выход"
+                    "\nВыберите дальнейшие действия:\n" +
+                            "0. Просмотреть заметки Архива и создать новые \n" +
+                            "1. Список Архивов\n" +
+                            "2. Назад"
                 )
                 while (true)
                     when (ArchiveManip.readInputString()) {
-                        "0" -> { archiveByIndex = ArchiveManip.getArchiveByIndex()
+                        "0" -> {println("Введите номер Архива:");
+                            archiveByIndex = ArchiveManip.getArchiveByIndex()
                             archiveByIndex.printNotes()
                             archiveDisplay(); break }
-                        "1" -> {mainDisplay(); break }
+                        "1" -> ArchiveManip.getMainArchiveList()
                         "2" -> return
                         else -> println("Вы вводите неверную команду")
                     }
@@ -43,21 +61,17 @@ class Display {
         fun archiveDisplay() {
             while (true) {
                 println(
-                    "Выберите дальнейшие действия:\n" +
-                            "0. Просмотреть список заметок \n" +
-                            "1. Создать заметку \n" +
-                            "2. Удалить заметку\n" +
-                            "3. Редактировать заметку" +
-                            "4. Вернуться в предыдущее меню\n" +
-                            "5. Выход"
-                )
+                    "\nВыберите дальнейшие действия:\n" +
+                            "0. Список заметок\t1. Выбрать заметку\n" +
+                            "2. Создать заметку\t3. Удалить заметку\n" +
+                            "4. Редактировать  \t5. Выход\n")
                 while (true)
                     when (ArchiveManip.readInputString()) {
-                        "0" -> {archiveByIndex.printNotes()}
-                        "1" -> {archiveByIndex.createNote()}
-                        "2" -> {archiveByIndex.deleteNote(ArchiveManip.readInputInt())}
-                        "3" -> {archiveByIndex.renameNote()}
-                        "4" -> {archiveListDisplay()}
+                        "0" -> {archiveByIndex.printNotes(); break}
+                        "1" -> {archiveByIndex.getNote(); break}
+                        "2" -> {archiveByIndex.createNote(); break}
+                        "3" -> {archiveByIndex.deleteNote(); break}
+                        "4" -> {archiveByIndex.renameNote(); break}
                         "5" -> return
                         else -> println("Вы вводите неверную команду")
                     }
