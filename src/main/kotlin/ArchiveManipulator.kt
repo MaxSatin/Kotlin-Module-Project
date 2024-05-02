@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-class ArchiveManip {
+class ArchiveManipulator {
 
     companion object {
         var noFirstArchive = true
@@ -44,12 +44,14 @@ class ArchiveManip {
                 println("Введите, пожалуйста, номер Архива")
                 input.next()
             }
-            val index = input.nextInt()
+            var index = input.nextInt()
             while (archives.getOrNull(index) == null) {
-                while (!input.hasNextInt()) {
+                println("Такого Архива нет")
+                while (!(input.hasNextInt())) {
                     println("Введите, пожалуйста, номер Архива")
                     input.next()
                 }
+                index = input.nextInt()
             }
             return archives.get(index)
         }
@@ -60,7 +62,8 @@ class ArchiveManip {
                 while (true)
                     when (readInputString()) {
                         "0" -> {
-                            createArchive(); break
+                            createArchive();
+                            break
                         }
 
                         "1" -> return

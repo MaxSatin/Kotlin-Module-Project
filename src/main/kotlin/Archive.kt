@@ -6,16 +6,16 @@ class Archive (
 
     fun createNote() {
         println("Введите заголовок заметки: ")
-        var noteName = ArchiveManip.readInputString().trim().toLowerCase().capitalize()
+        var noteName = ArchiveManipulator.readInputString().trim().toLowerCase().capitalize()
         while (noteName.isEmpty()) {
             println("Нельзя создать пустую заметку!")
-            noteName = ArchiveManip.readInputString().trim().toLowerCase().capitalize()
+            noteName = ArchiveManipulator.readInputString().trim().toLowerCase().capitalize()
         }
         println("Введите текст заметки: ")
-        var noteContents = ArchiveManip.readInputString()
+        var noteContents = ArchiveManipulator.readInputString()
         while (noteContents.isEmpty()) {
             println("Нельзя создать пустую заметку!")
-            noteContents = ArchiveManip.readInputString().trim().toLowerCase().capitalize()
+            noteContents = ArchiveManipulator.readInputString().trim().toLowerCase().capitalize()
         }
         this.notes.add(Note(noteName, noteContents))
         println("Заметка: $noteName успешно добавлена")
@@ -42,11 +42,11 @@ class Archive (
 
     fun deleteNote() {
         println("Заметку с каким номером нужно удалить?")
-        var index = ArchiveManip.readInputInt()
+        var index = ArchiveManipulator.readInputInt()
         while (index < 0 || index >= this.notes.size) {
             println("Заметки с таким номером не существует!\n" +
                     "Введите номер заметки повторно или на '-1' для выхода")
-            index = ArchiveManip.readInputInt()
+            index = ArchiveManipulator.readInputInt()
             if (index == -1)
                 return
         }
@@ -64,11 +64,11 @@ class Archive (
         }
         else {
             println("Введите номер заметки: ")
-            var index = ArchiveManip.readInputInt()
+            var index = ArchiveManipulator.readInputInt()
             while (index < 0 || index >= this.notes.size) {
                 println("Заметки с таким номером не существует!\n" +
                         "Введите номер заметки повторно или на '-1' для выхода")
-                index = ArchiveManip.readInputInt()
+                index = ArchiveManipulator.readInputInt()
                 if (index == -1)
                     return
             }
@@ -83,10 +83,10 @@ class Archive (
         var newString = ""
         if (string.isEmpty()) {
             println("Нельзя создать пустую заметку!")
-            newString = ArchiveManip.readInputString().trim().toLowerCase().capitalize()
+            newString = ArchiveManipulator.readInputString().trim().toLowerCase().capitalize()
             while (newString.isEmpty()) {
                 println("Нельзя создать пустую заметку!")
-                newString = ArchiveManip.readInputString().trim().toLowerCase().capitalize()
+                newString = ArchiveManipulator.readInputString().trim().toLowerCase().capitalize()
             }
             return newString
         }
@@ -94,7 +94,7 @@ class Archive (
     }
     fun addArchive() {
         println("Введите название Архива: ")
-        var archiveName = ArchiveManip.readInputString().trim().toLowerCase().capitalize()
+        var archiveName = ArchiveManipulator.readInputString().trim().toLowerCase().capitalize()
 
         innerArchive?.add(Archive(archiveName, mutableListOf()))
     }
@@ -102,7 +102,7 @@ class Archive (
     fun renameNote() {
         println("\nВыберите номер заметки, которую хотите изменить")
         this.printNotes()
-        var noteNumber = ArchiveManip.readInputInt()
+        var noteNumber = ArchiveManipulator.readInputInt()
         while (true) {
             println(
                 "Текущая заметка:" +
@@ -114,14 +114,14 @@ class Archive (
                         "\n3 - Выйти из редактирования"
             )
             while (true)
-                when (ArchiveManip.readInputString()) {
+                when (ArchiveManipulator.readInputString()) {
                     "1" -> { println("Введите новое название заметки");
-                        var newName = checkAndCorrectIfEmpty(ArchiveManip.readInputString());
+                        var newName = checkAndCorrectIfEmpty(ArchiveManipulator.readInputString());
                         this.notes.get(noteNumber).name = newName
                         println("Название переименовано.\n Введите следующую команду");
                     }
                     "2" -> {println("Введите новое содержание заметки")
-                        var newContents = checkAndCorrectIfEmpty(ArchiveManip.readInputString())
+                        var newContents = checkAndCorrectIfEmpty(ArchiveManipulator.readInputString())
                         this.notes.get(noteNumber).contents = newContents;
                         println("Содержание переименовано");
                     }
